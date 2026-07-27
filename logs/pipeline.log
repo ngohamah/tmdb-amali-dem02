@@ -1,0 +1,541 @@
+2026-07-24 15:19:10,728 [INFO] Skipping placeholder movie id 0
+2026-07-24 15:19:10,729 [WARNING] TMDB API key is not configured; falling back to cached sample data
+2026-07-24 15:19:10,729 [INFO] Stored raw payloads at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_movies.json
+2026-07-24 15:19:10,729 [INFO] Starting data cleaning for 2 records
+2026-07-24 15:19:10,732 [ERROR] Cleaning failed
+Traceback (most recent call last):
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/src/tmdb_pipeline/processing.py", line 39, in clean_movie_data
+    df[column] = flatten_json_field(df[column])
+                 ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/src/tmdb_pipeline/processing.py", line 27, in flatten_json_field
+    return series.apply(_normalize)
+           ~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/.venv/lib/python3.14/site-packages/pandas/core/series.py", line 5084, in apply
+    ).apply()
+      ~~~~~^^
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/.venv/lib/python3.14/site-packages/pandas/core/apply.py", line 1520, in apply
+    return self.apply_standard()
+           ~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/.venv/lib/python3.14/site-packages/pandas/core/apply.py", line 1578, in apply_standard
+    mapped = obj._map_values(mapper=curried)
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/.venv/lib/python3.14/site-packages/pandas/core/base.py", line 1022, in _map_values
+    return algorithms.map_array(arr, mapper, na_action=na_action)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/.venv/lib/python3.14/site-packages/pandas/core/algorithms.py", line 1715, in map_array
+    return lib.map_infer(values, mapper)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "pandas/_libs/lib.pyx", line 3071, in pandas._libs.lib.map_infer
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/src/tmdb_pipeline/processing.py", line 18, in _normalize
+    if pd.isna(value):
+       ~~~~~~~^^^^^^^
+ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+2026-07-24 15:19:10,736 [ERROR] Pipeline execution failed
+Traceback (most recent call last):
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/run_pipeline.py", line 31, in main
+    clean_df = clean_movie_data(payloads)
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/src/tmdb_pipeline/processing.py", line 39, in clean_movie_data
+    df[column] = flatten_json_field(df[column])
+                 ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/src/tmdb_pipeline/processing.py", line 27, in flatten_json_field
+    return series.apply(_normalize)
+           ~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/.venv/lib/python3.14/site-packages/pandas/core/series.py", line 5084, in apply
+    ).apply()
+      ~~~~~^^
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/.venv/lib/python3.14/site-packages/pandas/core/apply.py", line 1520, in apply
+    return self.apply_standard()
+           ~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/.venv/lib/python3.14/site-packages/pandas/core/apply.py", line 1578, in apply_standard
+    mapped = obj._map_values(mapper=curried)
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/.venv/lib/python3.14/site-packages/pandas/core/base.py", line 1022, in _map_values
+    return algorithms.map_array(arr, mapper, na_action=na_action)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/.venv/lib/python3.14/site-packages/pandas/core/algorithms.py", line 1715, in map_array
+    return lib.map_infer(values, mapper)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "pandas/_libs/lib.pyx", line 3071, in pandas._libs.lib.map_infer
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/src/tmdb_pipeline/processing.py", line 18, in _normalize
+    if pd.isna(value):
+       ~~~~~~~^^^^^^^
+ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+2026-07-24 15:19:33,610 [INFO] Skipping placeholder movie id 0
+2026-07-24 15:19:33,610 [WARNING] TMDB API key is not configured; falling back to cached sample data
+2026-07-24 15:19:33,611 [INFO] Stored raw payloads at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_movies.json
+2026-07-24 15:19:33,611 [INFO] Starting data cleaning for 2 records
+2026-07-24 15:19:33,621 [INFO] Cleaning completed with 2 rows
+2026-07-24 15:19:33,623 [INFO] Stored cleaned data at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/clean_movies.csv
+2026-07-24 15:19:33,623 [INFO] Building rankings
+2026-07-24 15:19:33,624 [ERROR] Pipeline execution failed
+Traceback (most recent call last):
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/run_pipeline.py", line 36, in main
+    rankings = build_rankings(clean_df)
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/src/tmdb_pipeline/analysis.py", line 24, in build_rankings
+    "highest_profit": rank_movies(df, "profit_musd", ascending=False),
+                      ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/src/tmdb_pipeline/analysis.py", line 14, in rank_movies
+    raise KeyError(f"Metric '{metric}' not found in dataframe")
+KeyError: "Metric 'profit_musd' not found in dataframe"
+2026-07-24 15:19:54,428 [INFO] Skipping placeholder movie id 0
+2026-07-24 15:19:54,428 [WARNING] TMDB API key is not configured; falling back to cached sample data
+2026-07-24 15:19:54,429 [INFO] Stored raw payloads at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_movies.json
+2026-07-24 15:19:54,429 [INFO] Starting data cleaning for 2 records
+2026-07-24 15:19:54,441 [INFO] Cleaning completed with 2 rows
+2026-07-24 15:19:54,448 [INFO] Stored cleaned data at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/clean_movies.csv
+2026-07-24 15:19:54,448 [INFO] Building rankings
+2026-07-24 15:19:56,701 [ERROR] Plot generation failed
+Traceback (most recent call last):
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/src/tmdb_pipeline/visualization.py", line 32, in save_plots
+    df.boxplot(column="roi", by="genres", ax=ax)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/.venv/lib/python3.14/site-packages/pandas/plotting/_core.py", line 653, in boxplot_frame
+    return plot_backend.boxplot_frame(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self,
+        ^^^^^
+    ...<9 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/.venv/lib/python3.14/site-packages/pandas/plotting/_matplotlib/boxplot.py", line 492, in boxplot_frame
+    ax = boxplot(
+        self,
+    ...<9 lines>...
+        **kwds,
+    )
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/.venv/lib/python3.14/site-packages/pandas/plotting/_matplotlib/boxplot.py", line 437, in boxplot
+    result = _grouped_plot_by_column(
+        plot_group,
+    ...<8 lines>...
+        **kwds,
+    )
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/.venv/lib/python3.14/site-packages/pandas/plotting/_matplotlib/boxplot.py", line 326, in _grouped_plot_by_column
+    gp_col = grouped[col]
+             ~~~~~~~^^^^^
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/.venv/lib/python3.14/site-packages/pandas/core/groupby/generic.py", line 2938, in __getitem__
+    return super().__getitem__(key)
+           ~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/.venv/lib/python3.14/site-packages/pandas/core/base.py", line 228, in __getitem__
+    raise KeyError(f"Column not found: {key}")
+KeyError: 'Column not found: roi'
+2026-07-24 15:19:56,704 [ERROR] Pipeline execution failed
+Traceback (most recent call last):
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/run_pipeline.py", line 40, in main
+    save_plots(clean_df, PLOTS_DIR)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/src/tmdb_pipeline/visualization.py", line 32, in save_plots
+    df.boxplot(column="roi", by="genres", ax=ax)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/.venv/lib/python3.14/site-packages/pandas/plotting/_core.py", line 653, in boxplot_frame
+    return plot_backend.boxplot_frame(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self,
+        ^^^^^
+    ...<9 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/.venv/lib/python3.14/site-packages/pandas/plotting/_matplotlib/boxplot.py", line 492, in boxplot_frame
+    ax = boxplot(
+        self,
+    ...<9 lines>...
+        **kwds,
+    )
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/.venv/lib/python3.14/site-packages/pandas/plotting/_matplotlib/boxplot.py", line 437, in boxplot
+    result = _grouped_plot_by_column(
+        plot_group,
+    ...<8 lines>...
+        **kwds,
+    )
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/.venv/lib/python3.14/site-packages/pandas/plotting/_matplotlib/boxplot.py", line 326, in _grouped_plot_by_column
+    gp_col = grouped[col]
+             ~~~~~~~^^^^^
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/.venv/lib/python3.14/site-packages/pandas/core/groupby/generic.py", line 2938, in __getitem__
+    return super().__getitem__(key)
+           ~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/.venv/lib/python3.14/site-packages/pandas/core/base.py", line 228, in __getitem__
+    raise KeyError(f"Column not found: {key}")
+KeyError: 'Column not found: roi'
+2026-07-24 15:20:11,539 [INFO] Skipping placeholder movie id 0
+2026-07-24 15:20:11,540 [WARNING] TMDB API key is not configured; falling back to cached sample data
+2026-07-24 15:20:11,541 [INFO] Stored raw payloads at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_movies.json
+2026-07-24 15:20:11,541 [INFO] Starting data cleaning for 2 records
+2026-07-24 15:20:11,555 [INFO] Cleaning completed with 2 rows
+2026-07-24 15:20:11,556 [INFO] Stored cleaned data at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/clean_movies.csv
+2026-07-24 15:20:11,557 [INFO] Building rankings
+2026-07-24 15:20:11,924 [INFO] Saved 3 plots
+2026-07-24 15:20:11,941 [INFO] Wrote report to /Users/rodney/Desktop/AMALITECH/Labs/DEM02/reports/movie_analysis_report.md
+2026-07-24 16:15:38,405 [INFO] Skipping placeholder movie id 0
+2026-07-24 16:15:39,237 [ERROR] Failed to fetch movie 299534
+Traceback (most recent call last):
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/src/tmdb_pipeline/api_utils.py", line 40, in fetch_movie_payload
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/.venv/lib/python3.14/site-packages/requests/models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: https://api.themoviedb.org/3/search/movie299534?api_key=655f6219c135a046f52a56f4765b3d1a&language=en-US
+2026-07-24 16:15:39,244 [INFO] Stored raw payloads at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_movies.json
+2026-07-24 16:15:39,244 [INFO] Starting data cleaning for 2 records
+2026-07-24 16:15:39,267 [INFO] Cleaning completed with 2 rows
+2026-07-24 16:15:39,269 [INFO] Stored cleaned data at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/clean_movies.csv
+2026-07-24 16:15:39,269 [INFO] Building rankings
+2026-07-24 16:15:39,896 [INFO] Saved 3 plots
+2026-07-24 16:15:39,912 [INFO] Wrote report to /Users/rodney/Desktop/AMALITECH/Labs/DEM02/reports/movie_analysis_report.md
+2026-07-24 16:21:59,006 [INFO] Skipping placeholder movie id 0
+2026-07-24 16:21:59,828 [ERROR] Failed to fetch movie 299534
+Traceback (most recent call last):
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/src/tmdb_pipeline/api_utils.py", line 40, in fetch_movie_payload
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/.venv/lib/python3.14/site-packages/requests/models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: https://api.themoviedb.org/3/search/movie299534?api_key=655f6219c135a046f52a56f4765b3d1a&language=en-US
+2026-07-24 16:21:59,839 [INFO] Stored raw payloads at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_movies.json
+2026-07-24 16:21:59,840 [INFO] Starting data cleaning for 2 records
+2026-07-24 16:21:59,863 [INFO] Cleaning completed with 2 rows
+2026-07-24 16:21:59,865 [INFO] Stored cleaned data at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/clean_movies.csv
+2026-07-24 16:21:59,865 [INFO] Building rankings
+2026-07-24 16:22:00,499 [INFO] Saved 3 plots
+2026-07-24 16:22:00,523 [INFO] Wrote report to /Users/rodney/Desktop/AMALITECH/Labs/DEM02/reports/movie_analysis_report.md
+2026-07-24 16:27:27,991 [INFO] Skipping placeholder movie id 0
+2026-07-24 16:27:28,979 [ERROR] Failed to fetch movie 299534
+Traceback (most recent call last):
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/src/tmdb_pipeline/api_utils.py", line 40, in fetch_movie_payload
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/.venv/lib/python3.14/site-packages/requests/models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://api.themoviedb.org/3/movie/changes?page=299534&api_key=655f6219c135a046f52a56f4765b3d1a&language=en-US
+2026-07-24 16:27:28,988 [INFO] Stored raw payloads at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_movies.json
+2026-07-24 16:27:28,989 [INFO] Starting data cleaning for 2 records
+2026-07-24 16:27:29,013 [INFO] Cleaning completed with 2 rows
+2026-07-24 16:27:29,017 [INFO] Stored cleaned data at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/clean_movies.csv
+2026-07-24 16:27:29,017 [INFO] Building rankings
+2026-07-24 16:27:29,526 [INFO] Saved 3 plots
+2026-07-24 16:27:29,545 [INFO] Wrote report to /Users/rodney/Desktop/AMALITECH/Labs/DEM02/reports/movie_analysis_report.md
+2026-07-24 16:38:48,594 [INFO] Skipping placeholder movie id 0
+2026-07-24 16:38:48,595 [ERROR] Pipeline execution failed
+Traceback (most recent call last):
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/run_pipeline.py", line 26, in main
+    payloads = fetch_movie_batch()
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/src/tmdb_pipeline/api_utils.py", line 64, in fetch_movie_batch
+    payload = fetch_movie_payload(session, movie_id)
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/src/tmdb_pipeline/api_utils.py", line 35, in fetch_movie_payload
+    url = f"{TMDB_API_URL}".format(collection_id=movie_id)
+KeyError: 'TMDB_API_KEY'
+2026-07-24 17:15:14,933 [INFO] Skipping placeholder movie id 0
+2026-07-24 17:15:14,934 [ERROR] Pipeline execution failed
+Traceback (most recent call last):
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/run_pipeline.py", line 26, in main
+    payloads = fetch_movie_batch()
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/src/tmdb_pipeline/api_utils.py", line 63, in fetch_movie_batch
+    payload = fetch_movie_payload(session, movie_id)
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/src/tmdb_pipeline/api_utils.py", line 34, in fetch_movie_payload
+    url = f"{TMDB_API_URL}".format(collection_id=movie_id)
+KeyError: 'TMDB_API_KEY'
+2026-07-24 17:15:27,584 [INFO] Skipping placeholder movie id 0
+2026-07-24 17:15:27,585 [ERROR] Pipeline execution failed
+Traceback (most recent call last):
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/run_pipeline.py", line 26, in main
+    payloads = fetch_movie_batch()
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/src/tmdb_pipeline/api_utils.py", line 63, in fetch_movie_batch
+    payload = fetch_movie_payload(session, movie_id)
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/src/tmdb_pipeline/api_utils.py", line 34, in fetch_movie_payload
+    url = f"{TMDB_API_URL}".format(collection_id=movie_id)
+KeyError: 'TMDB_API_KEYY'
+2026-07-24 17:16:25,766 [INFO] Skipping placeholder movie id 0
+2026-07-24 17:16:25,767 [ERROR] Pipeline execution failed
+Traceback (most recent call last):
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/run_pipeline.py", line 26, in main
+    payloads = fetch_movie_batch()
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/src/tmdb_pipeline/api_utils.py", line 63, in fetch_movie_batch
+    payload = fetch_movie_payload(session, movie_id)
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/src/tmdb_pipeline/api_utils.py", line 34, in fetch_movie_payload
+    url = f"{TMDB_API_URL}".format(collection_id=movie_id)
+KeyError: 'TMDB_API_KEY'
+2026-07-24 17:25:36,449 [INFO] Skipping placeholder movie id 0
+2026-07-24 17:25:37,399 [INFO] Fetched movie 299534 from TMDB
+2026-07-24 17:25:37,763 [INFO] Fetched movie 19995 from TMDB
+2026-07-24 17:25:38,120 [INFO] Fetched movie 140607 from TMDB
+2026-07-24 17:25:38,478 [INFO] Fetched movie 299536 from TMDB
+2026-07-24 17:25:38,843 [INFO] Fetched movie 597 from TMDB
+2026-07-24 17:25:39,204 [INFO] Fetched movie 135397 from TMDB
+2026-07-24 17:25:39,559 [INFO] Fetched movie 420818 from TMDB
+2026-07-24 17:25:40,025 [INFO] Fetched movie 24428 from TMDB
+2026-07-24 17:25:40,388 [INFO] Fetched movie 168259 from TMDB
+2026-07-24 17:25:40,747 [INFO] Fetched movie 99861 from TMDB
+2026-07-24 17:25:41,104 [INFO] Fetched movie 284054 from TMDB
+2026-07-24 17:25:41,463 [INFO] Fetched movie 12445 from TMDB
+2026-07-24 17:25:41,817 [INFO] Fetched movie 181808 from TMDB
+2026-07-24 17:25:42,282 [INFO] Fetched movie 330457 from TMDB
+2026-07-24 17:25:42,640 [INFO] Fetched movie 351286 from TMDB
+2026-07-24 17:25:42,998 [INFO] Fetched movie 109445 from TMDB
+2026-07-24 17:25:42,998 [INFO] Skipping placeholder movie id 0
+2026-07-24 17:25:43,354 [INFO] Fetched movie 321612 from TMDB
+2026-07-24 17:25:43,678 [INFO] Fetched movie 299534 from TMDB
+2026-07-24 17:25:43,710 [INFO] Fetched movie 260513 from TMDB
+2026-07-24 17:25:43,715 [INFO] Completed batch fetch for 18 movies
+2026-07-24 17:25:43,716 [INFO] Stored raw payloads at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_movies.json
+2026-07-24 17:25:43,717 [INFO] Starting data cleaning for 18 records
+2026-07-24 17:25:43,765 [INFO] Cleaning completed with 18 rows
+2026-07-24 17:25:43,769 [INFO] Stored cleaned data at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/clean_movies.csv
+2026-07-24 17:25:43,769 [INFO] Building rankings
+2026-07-24 17:25:43,932 [INFO] Fetched movie 19995 from TMDB
+2026-07-24 17:25:44,187 [INFO] Fetched movie 140607 from TMDB
+2026-07-24 17:25:44,444 [INFO] Fetched movie 299536 from TMDB
+2026-07-24 17:25:44,510 [INFO] Saved 3 plots
+2026-07-24 17:25:44,538 [INFO] Wrote report to /Users/rodney/Desktop/AMALITECH/Labs/DEM02/reports/movie_analysis_report.md
+2026-07-24 17:25:44,703 [INFO] Fetched movie 597 from TMDB
+2026-07-24 17:25:44,964 [INFO] Fetched movie 135397 from TMDB
+2026-07-24 17:25:45,241 [INFO] Fetched movie 420818 from TMDB
+2026-07-24 17:25:45,498 [INFO] Fetched movie 24428 from TMDB
+2026-07-24 17:25:45,754 [INFO] Fetched movie 168259 from TMDB
+2026-07-24 17:25:46,029 [INFO] Fetched movie 99861 from TMDB
+2026-07-24 17:25:46,284 [INFO] Fetched movie 284054 from TMDB
+2026-07-24 17:25:46,632 [INFO] Fetched movie 12445 from TMDB
+2026-07-24 17:25:46,903 [INFO] Fetched movie 181808 from TMDB
+2026-07-24 17:25:47,259 [INFO] Fetched movie 330457 from TMDB
+2026-07-24 17:25:47,791 [INFO] Fetched movie 351286 from TMDB
+2026-07-24 17:25:48,135 [INFO] Fetched movie 109445 from TMDB
+2026-07-24 17:25:48,484 [INFO] Fetched movie 321612 from TMDB
+2026-07-24 17:25:48,837 [INFO] Fetched movie 260513 from TMDB
+2026-07-24 17:25:48,839 [INFO] Completed batch fetch for 18 movies
+2026-07-24 17:25:48,839 [INFO] Stored raw payloads at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_movies.json
+2026-07-24 17:25:48,840 [INFO] Starting data cleaning for 18 records
+2026-07-24 17:25:48,869 [INFO] Cleaning completed with 18 rows
+2026-07-24 17:25:48,876 [INFO] Stored cleaned data at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/clean_movies.csv
+2026-07-24 17:25:48,876 [INFO] Building rankings
+2026-07-24 17:25:49,409 [INFO] Saved 3 plots
+2026-07-24 17:25:49,427 [INFO] Wrote report to /Users/rodney/Desktop/AMALITECH/Labs/DEM02/reports/movie_analysis_report.md
+2026-07-24 17:26:06,045 [INFO] Using cached payloads from /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_payloads.json
+2026-07-24 17:26:06,046 [INFO] Returning cached payloads for 18 movies
+2026-07-24 17:26:06,046 [INFO] Stored raw payloads at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_movies.json
+2026-07-24 17:26:06,046 [INFO] Starting data cleaning for 18 records
+2026-07-24 17:26:06,060 [INFO] Cleaning completed with 18 rows
+2026-07-24 17:26:06,063 [INFO] Stored cleaned data at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/clean_movies.csv
+2026-07-24 17:26:06,063 [INFO] Building rankings
+2026-07-24 17:26:06,560 [INFO] Saved 3 plots
+2026-07-24 17:26:06,577 [INFO] Wrote report to /Users/rodney/Desktop/AMALITECH/Labs/DEM02/reports/movie_analysis_report.md
+2026-07-24 17:35:43,883 [INFO] Using cached payloads from /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_payloads.json
+2026-07-24 17:35:43,884 [INFO] Returning cached payloads for 18 movies
+2026-07-24 17:35:43,884 [INFO] Stored raw payloads at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_movies.json
+2026-07-24 17:35:43,884 [INFO] Starting data cleaning for 18 records
+2026-07-24 17:35:43,896 [INFO] Cleaning completed with 18 rows
+2026-07-24 17:35:43,898 [INFO] Stored cleaned data at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/clean_movies.csv
+2026-07-24 17:35:43,898 [INFO] Building rankings
+2026-07-24 17:35:44,460 [INFO] Saved 3 plots
+2026-07-24 17:35:44,478 [INFO] Wrote report to /Users/rodney/Desktop/AMALITECH/Labs/DEM02/reports/movie_analysis_report.md
+2026-07-24 17:37:58,340 [ERROR] Failed to fetch movie 0
+Traceback (most recent call last):
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/src/tmdb_pipeline/api_utils.py", line 39, in fetch_movie_payload
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/.venv/lib/python3.14/site-packages/requests/models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: https://api.themoviedb.org/3/movie/0?api_key=655f6219c135a046f52a56f4765b3d1a&language=en-US
+2026-07-24 17:37:58,346 [ERROR] Pipeline execution failed
+Traceback (most recent call last):
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/run_pipeline.py", line 26, in main
+    payloads = fetch_movie_batch()
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/src/tmdb_pipeline/api_utils.py", line 60, in fetch_movie_batch
+    payload = fetch_movie_payload(session, movie_id)
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/src/tmdb_pipeline/api_utils.py", line 39, in fetch_movie_payload
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/.venv/lib/python3.14/site-packages/requests/models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: https://api.themoviedb.org/3/movie/0?api_key=655f6219c135a046f52a56f4765b3d1a&language=en-US
+2026-07-24 17:39:00,310 [ERROR] Failed to fetch movie 0
+Traceback (most recent call last):
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/src/tmdb_pipeline/api_utils.py", line 39, in fetch_movie_payload
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/.venv/lib/python3.14/site-packages/requests/models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: https://api.themoviedb.org/3/movie/0?api_key=655f6219c135a046f52a56f4765b3d1a&language=en-US
+2026-07-24 17:39:00,315 [ERROR] Pipeline execution failed
+Traceback (most recent call last):
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/run_pipeline.py", line 26, in main
+    payloads = fetch_movie_batch()
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/src/tmdb_pipeline/api_utils.py", line 60, in fetch_movie_batch
+    payload = fetch_movie_payload(session, movie_id)
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/src/tmdb_pipeline/api_utils.py", line 39, in fetch_movie_payload
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/.venv/lib/python3.14/site-packages/requests/models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: https://api.themoviedb.org/3/movie/0?api_key=655f6219c135a046f52a56f4765b3d1a&language=en-US
+2026-07-24 17:42:21,877 [INFO] Skipping invalid movie id 0
+2026-07-24 17:42:23,008 [INFO] Fetched movie 299534 from TMDB
+2026-07-24 17:42:23,218 [INFO] Fetched movie 19995 from TMDB
+2026-07-24 17:42:23,427 [INFO] Fetched movie 140607 from TMDB
+2026-07-24 17:42:23,632 [INFO] Fetched movie 299536 from TMDB
+2026-07-24 17:42:23,837 [INFO] Fetched movie 597 from TMDB
+2026-07-24 17:42:24,195 [INFO] Fetched movie 135397 from TMDB
+2026-07-24 17:42:24,402 [INFO] Fetched movie 420818 from TMDB
+2026-07-24 17:42:24,608 [INFO] Fetched movie 24428 from TMDB
+2026-07-24 17:42:24,815 [INFO] Fetched movie 168259 from TMDB
+2026-07-24 17:42:25,024 [INFO] Fetched movie 99861 from TMDB
+2026-07-24 17:42:25,230 [INFO] Fetched movie 284054 from TMDB
+2026-07-24 17:42:25,445 [INFO] Fetched movie 12445 from TMDB
+2026-07-24 17:42:25,650 [INFO] Fetched movie 181808 from TMDB
+2026-07-24 17:42:25,858 [INFO] Fetched movie 330457 from TMDB
+2026-07-24 17:42:26,227 [INFO] Fetched movie 351286 from TMDB
+2026-07-24 17:42:26,436 [INFO] Fetched movie 109445 from TMDB
+2026-07-24 17:42:26,687 [INFO] Fetched movie 321612 from TMDB
+2026-07-24 17:42:26,898 [INFO] Fetched movie 260513 from TMDB
+2026-07-24 17:42:26,902 [INFO] Completed batch fetch for 18 movies
+2026-07-24 17:42:26,906 [INFO] Stored raw payloads at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_movies.json
+2026-07-24 17:42:26,907 [INFO] Starting data cleaning for 18 records
+2026-07-24 17:42:26,952 [INFO] Cleaning completed with 18 rows
+2026-07-24 17:42:26,955 [INFO] Stored cleaned data at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/clean_movies.csv
+2026-07-24 17:42:26,955 [INFO] Building rankings
+2026-07-24 17:42:27,565 [INFO] Saved 3 plots
+2026-07-24 17:42:27,586 [INFO] Wrote report to /Users/rodney/Desktop/AMALITECH/Labs/DEM02/reports/movie_analysis_report.md
+2026-07-24 17:45:09,501 [INFO] Using cached payloads from /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_payloads.json
+2026-07-24 17:45:09,501 [INFO] Returning cached payloads for 18 movies
+2026-07-24 17:45:09,502 [INFO] Stored raw payloads at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_movies.json
+2026-07-24 17:45:09,502 [INFO] Starting data cleaning for 18 records
+2026-07-24 17:45:09,513 [INFO] Cleaning completed with 18 rows
+2026-07-24 17:45:09,515 [INFO] Stored cleaned data at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/clean_movies.csv
+2026-07-24 17:45:09,515 [INFO] Building rankings
+2026-07-24 17:45:10,005 [INFO] Saved 3 plots
+2026-07-24 17:45:10,023 [INFO] Wrote report to /Users/rodney/Desktop/AMALITECH/Labs/DEM02/reports/movie_analysis_report.md
+2026-07-24 17:48:55,373 [INFO] Using cached payloads from /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_payloads.json
+2026-07-24 17:48:55,373 [INFO] Returning cached payloads for 18 movies
+2026-07-24 17:48:55,374 [INFO] Stored raw payloads at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_movies.json
+2026-07-24 17:48:55,374 [INFO] Starting data cleaning for 18 records
+2026-07-24 17:48:55,387 [INFO] Cleaning completed with 18 rows
+2026-07-24 17:48:55,388 [INFO] Stored cleaned data at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/clean_movies.csv
+2026-07-24 17:48:55,388 [INFO] Building rankings
+2026-07-24 17:48:55,902 [INFO] Saved 3 plots
+2026-07-24 17:48:55,920 [INFO] Wrote report to /Users/rodney/Desktop/AMALITECH/Labs/DEM02/reports/movie_analysis_report.md
+2026-07-24 17:50:10,907 [ERROR] Failed to fetch movie 0
+Traceback (most recent call last):
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/src/tmdb_pipeline/api_utils.py", line 39, in fetch_movie_payload
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/.venv/lib/python3.14/site-packages/requests/models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: https://api.themoviedb.org/3/movie/0?api_key=655f6219c135a046f52a56f4765b3d1a&language=en-US
+2026-07-24 17:50:10,912 [ERROR] Pipeline execution failed
+Traceback (most recent call last):
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/run_pipeline.py", line 26, in main
+    payloads = fetch_movie_batch()
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/src/tmdb_pipeline/api_utils.py", line 60, in fetch_movie_batch
+    payload = fetch_movie_payload(session, movie_id)
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/src/tmdb_pipeline/api_utils.py", line 39, in fetch_movie_payload
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/rodney/Desktop/AMALITECH/Labs/DEM02/.venv/lib/python3.14/site-packages/requests/models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: https://api.themoviedb.org/3/movie/0?api_key=655f6219c135a046f52a56f4765b3d1a&language=en-US
+2026-07-24 17:51:56,512 [INFO] Skipping invalid movie id 0
+2026-07-24 17:51:57,328 [INFO] Fetched movie 299534 from TMDB
+2026-07-24 17:51:57,544 [INFO] Fetched movie 19995 from TMDB
+2026-07-24 17:51:57,751 [INFO] Fetched movie 140607 from TMDB
+2026-07-24 17:51:57,978 [INFO] Fetched movie 299536 from TMDB
+2026-07-24 17:51:58,193 [INFO] Fetched movie 597 from TMDB
+2026-07-24 17:51:58,401 [INFO] Fetched movie 135397 from TMDB
+2026-07-24 17:51:58,610 [INFO] Fetched movie 420818 from TMDB
+2026-07-24 17:51:58,826 [INFO] Fetched movie 24428 from TMDB
+2026-07-24 17:51:59,036 [INFO] Fetched movie 168259 from TMDB
+2026-07-24 17:51:59,245 [INFO] Fetched movie 99861 from TMDB
+2026-07-24 17:51:59,455 [INFO] Fetched movie 284054 from TMDB
+2026-07-24 17:51:59,664 [INFO] Fetched movie 12445 from TMDB
+2026-07-24 17:51:59,871 [INFO] Fetched movie 181808 from TMDB
+2026-07-24 17:52:00,079 [INFO] Fetched movie 330457 from TMDB
+2026-07-24 17:52:00,441 [INFO] Fetched movie 351286 from TMDB
+2026-07-24 17:52:00,657 [INFO] Fetched movie 109445 from TMDB
+2026-07-24 17:52:00,865 [INFO] Fetched movie 321612 from TMDB
+2026-07-24 17:52:01,073 [INFO] Fetched movie 260513 from TMDB
+2026-07-24 17:52:01,076 [INFO] Completed batch fetch for 18 movies
+2026-07-24 17:52:01,077 [INFO] Stored raw payloads at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_movies.json
+2026-07-24 17:52:01,078 [INFO] Starting data cleaning for 18 records
+2026-07-24 17:52:01,105 [INFO] Cleaning completed with 18 rows
+2026-07-24 17:52:01,109 [INFO] Stored cleaned data at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/clean_movies.csv
+2026-07-24 17:52:01,109 [INFO] Building rankings
+2026-07-24 17:52:01,621 [INFO] Saved 3 plots
+2026-07-24 17:52:01,639 [INFO] Wrote report to /Users/rodney/Desktop/AMALITECH/Labs/DEM02/reports/movie_analysis_report.md
+2026-07-27 01:14:26,492 [INFO] Using cached payloads from /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_payloads.json
+2026-07-27 01:14:26,492 [INFO] Returning cached payloads for 18 movies
+2026-07-27 01:14:26,493 [INFO] Stored raw payloads at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_movies.json
+2026-07-27 01:14:26,493 [INFO] Starting data cleaning for 18 records
+2026-07-27 01:14:26,499 [INFO] Cleaning completed with 18 rows
+2026-07-27 01:14:26,500 [INFO] Stored cleaned data at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/clean_movies.csv
+2026-07-27 01:14:26,500 [INFO] Building rankings
+2026-07-27 01:14:26,910 [INFO] Saved 3 plots
+2026-07-27 01:14:26,927 [INFO] Wrote report to /Users/rodney/Desktop/AMALITECH/Labs/DEM02/reports/movie_analysis_report.md
+2026-07-27 01:34:31,364 [INFO] Using cached payloads from /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_payloads.json
+2026-07-27 01:34:31,364 [INFO] Returning cached payloads for 18 movies
+2026-07-27 01:34:31,365 [INFO] Stored raw payloads at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_movies.json
+2026-07-27 01:34:31,365 [INFO] Starting data cleaning for 18 records
+2026-07-27 01:34:31,392 [INFO] Cleaning completed with 18 rows
+2026-07-27 01:34:31,394 [INFO] Stored cleaned data at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/clean_movies.csv
+2026-07-27 01:34:31,394 [INFO] Building rankings
+2026-07-27 01:34:31,805 [INFO] Saved 3 plots
+2026-07-27 01:34:31,822 [INFO] Wrote report to /Users/rodney/Desktop/AMALITECH/Labs/DEM02/reports/movie_analysis_report.md
+2026-07-27 01:58:23,715 [INFO] Using cached payloads from /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_payloads.json
+2026-07-27 01:58:23,716 [INFO] Returning cached payloads for 18 movies
+2026-07-27 01:58:23,716 [INFO] Stored raw payloads at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_movies.json
+2026-07-27 01:58:23,716 [INFO] Starting data cleaning for 18 records
+2026-07-27 01:58:23,731 [INFO] Cleaning completed with 18 rows
+2026-07-27 01:58:23,733 [INFO] Stored cleaned data at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/clean_movies.csv
+2026-07-27 01:58:23,733 [INFO] Building rankings
+2026-07-27 01:58:24,135 [INFO] Saved 3 plots
+2026-07-27 01:58:24,151 [INFO] Wrote report to /Users/rodney/Desktop/AMALITECH/Labs/DEM02/reports/movie_analysis_report.md
+2026-07-27 03:12:54,109 [INFO] Using cached payloads from /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_payloads.json
+2026-07-27 03:12:54,110 [INFO] Returning cached payloads for 18 movies
+2026-07-27 03:12:54,110 [INFO] Stored raw payloads at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_movies.json
+2026-07-27 03:12:54,110 [INFO] Starting data cleaning for 18 records
+2026-07-27 03:12:54,123 [INFO] Cleaning completed with 18 rows
+2026-07-27 03:12:54,124 [INFO] Stored cleaned data at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/clean_movies.csv
+2026-07-27 03:12:54,124 [INFO] Building rankings
+2026-07-27 03:12:54,511 [INFO] Saved 3 plots
+2026-07-27 03:12:54,528 [INFO] Wrote report to /Users/rodney/Desktop/AMALITECH/Labs/DEM02/reports/movie_analysis_report.md
+2026-07-27 03:37:26,274 [INFO] Using cached payloads from /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_payloads.json
+2026-07-27 03:37:26,275 [INFO] Returning cached payloads for 18 movies
+2026-07-27 03:37:26,275 [INFO] Stored raw payloads at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_movies.json
+2026-07-27 03:37:26,275 [INFO] Starting data cleaning for 18 records
+2026-07-27 03:37:26,290 [INFO] Cleaning completed with 18 rows
+2026-07-27 03:37:26,291 [INFO] Stored cleaned data at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/clean_movies.csv
+2026-07-27 03:37:26,291 [INFO] Building rankings
+2026-07-27 03:37:26,715 [INFO] Saved 3 plots
+2026-07-27 03:37:26,734 [INFO] Wrote report to /Users/rodney/Desktop/AMALITECH/Labs/DEM02/reports/movie_analysis_report.md
+2026-07-27 03:38:58,906 [INFO] Using cached payloads from /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_payloads.json
+2026-07-27 03:38:58,907 [INFO] Returning cached payloads for 18 movies
+2026-07-27 03:38:58,907 [INFO] Stored raw payloads at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_movies.json
+2026-07-27 03:38:58,907 [INFO] Starting data cleaning for 18 records
+2026-07-27 03:38:58,916 [INFO] Cleaning completed with 18 rows
+2026-07-27 03:38:58,917 [INFO] Stored cleaned data at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/clean_movies.csv
+2026-07-27 03:38:58,917 [INFO] Building rankings
+2026-07-27 03:38:59,284 [INFO] Saved 3 plots
+2026-07-27 03:38:59,301 [INFO] Wrote report to /Users/rodney/Desktop/AMALITECH/Labs/DEM02/reports/movie_analysis_report.md
+2026-07-27 03:39:19,794 [INFO] Using cached payloads from /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_payloads.json
+2026-07-27 03:39:19,794 [INFO] Returning cached payloads for 18 movies
+2026-07-27 03:39:19,795 [INFO] Stored raw payloads at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_movies.json
+2026-07-27 03:39:19,795 [INFO] Starting data cleaning for 18 records
+2026-07-27 03:39:19,799 [INFO] Cleaning completed with 18 rows
+2026-07-27 03:39:19,800 [INFO] Stored cleaned data at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/clean_movies.csv
+2026-07-27 03:39:19,800 [INFO] Building rankings
+2026-07-27 03:39:20,174 [INFO] Saved 3 plots
+2026-07-27 03:39:20,191 [INFO] Wrote report to /Users/rodney/Desktop/AMALITECH/Labs/DEM02/reports/movie_analysis_report.md
+2026-07-27 03:39:37,134 [INFO] Using cached payloads from /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_payloads.json
+2026-07-27 03:39:37,135 [INFO] Returning cached payloads for 18 movies
+2026-07-27 03:39:37,135 [INFO] Stored raw payloads at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_movies.json
+2026-07-27 03:39:37,135 [INFO] Starting data cleaning for 18 records
+2026-07-27 03:39:37,140 [INFO] Cleaning completed with 18 rows
+2026-07-27 03:39:37,141 [INFO] Stored cleaned data at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/clean_movies.csv
+2026-07-27 03:39:37,141 [INFO] Building rankings
+2026-07-27 03:39:37,523 [INFO] Saved 3 plots
+2026-07-27 03:39:37,541 [INFO] Wrote report to /Users/rodney/Desktop/AMALITECH/Labs/DEM02/reports/movie_analysis_report.md
+2026-07-27 04:12:51,195 [INFO] Using cached payloads from /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_payloads.json
+2026-07-27 04:12:51,196 [INFO] Returning cached payloads for 18 movies
+2026-07-27 04:12:51,196 [INFO] Stored raw payloads at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_movies.json
+2026-07-27 04:12:51,196 [INFO] Starting data cleaning for 18 records
+2026-07-27 04:12:51,207 [INFO] Cleaning completed with 18 rows
+2026-07-27 04:12:51,209 [INFO] Stored cleaned data at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/clean_movies.csv
+2026-07-27 04:12:51,209 [INFO] Building rankings
+2026-07-27 04:12:51,652 [INFO] Saved 3 plots
+2026-07-27 04:12:51,669 [INFO] Wrote report to /Users/rodney/Desktop/AMALITECH/Labs/DEM02/reports/movie_analysis_report.md
