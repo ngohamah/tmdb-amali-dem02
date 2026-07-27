@@ -6,7 +6,7 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-from .config import FINAL_COLUMNS, JSON_COLUMNS, IRRELEVANT_COLUMNS
+from .config import FINAL_COLUMNS, IRRELEVANT_COLUMNS, JSON_COLUMNS
 from .logger_config import configure_logger
 
 logger = configure_logger(__name__)

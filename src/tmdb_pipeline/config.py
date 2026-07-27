@@ -1,5 +1,4 @@
 """Configuration values for the TMDB pipeline."""
-import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parents[2]
