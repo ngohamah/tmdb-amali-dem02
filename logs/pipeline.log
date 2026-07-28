@@ -539,3 +539,12 @@ requests.exceptions.HTTPError: 404 Client Error: Not Found for url: https://api.
 2026-07-27 04:12:51,209 [INFO] Building rankings
 2026-07-27 04:12:51,652 [INFO] Saved 3 plots
 2026-07-27 04:12:51,669 [INFO] Wrote report to /Users/rodney/Desktop/AMALITECH/Labs/DEM02/reports/movie_analysis_report.md
+2026-07-27 10:41:06,558 [INFO] Using cached payloads from /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_payloads.json
+2026-07-27 10:41:06,558 [INFO] Returning cached payloads for 18 movies
+2026-07-27 10:41:06,559 [INFO] Stored raw payloads at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/raw_movies.json
+2026-07-27 10:41:06,559 [INFO] Starting data cleaning for 18 records
+2026-07-27 10:41:06,572 [INFO] Cleaning completed with 18 rows
+2026-07-27 10:41:06,574 [INFO] Stored cleaned data at /Users/rodney/Desktop/AMALITECH/Labs/DEM02/data/clean_movies.csv
+2026-07-27 10:41:06,574 [INFO] Building rankings
+2026-07-27 10:41:07,118 [INFO] Saved 3 plots
+2026-07-27 10:41:07,137 [INFO] Wrote report to /Users/rodney/Desktop/AMALITECH/Labs/DEM02/reports/movie_analysis_report.md

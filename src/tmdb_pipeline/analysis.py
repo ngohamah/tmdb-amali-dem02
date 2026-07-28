@@ -62,13 +62,6 @@ def search_uma_thurman_quentin_tarantino(df: pd.DataFrame) -> pd.DataFrame:
     ].sort_values(by="runtime", ascending=True).reset_index(drop=True)
 
 
-def search_movies(df: pd.DataFrame, query: str) -> pd.DataFrame:
-    """Search a dataframe by a case-insensitive query."""
-    if "title" not in df.columns:
-        raise KeyError("No title column available")
-    return df[df["title"].str.contains(query, case=False, na=False)].reset_index(drop=True)
-
-
 def summarize_franchise_performance(df: pd.DataFrame) -> pd.DataFrame:
     """Summarize franchise metrics."""
     return (
