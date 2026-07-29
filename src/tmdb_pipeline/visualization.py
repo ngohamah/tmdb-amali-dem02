@@ -40,18 +40,23 @@ def save_plots(df: pd.DataFrame, output_dir: Path) -> list[Path]:
 
     primary_studio = plot_df["production_companies"].fillna("Unknown").str.split("|").str[0]
     studio_codes, studio_labels = pd.factorize(primary_studio)
+    studio_cmap = plt.get_cmap("tab20")
+    studio_norm = plt.Normalize(vmin=0, vmax=max(len(studio_labels) - 1, 1))
+    studio_handles = [
+        plt.Line2D([], [], marker="o", linestyle="", color=studio_cmap(studio_norm(code)), label=label)
+        for code, label in enumerate(studio_labels)
+    ]
 
     try:
         fig, ax = plt.subplots(figsize=(12, 9))
-        scatter = ax.scatter(
+        ax.scatter(
             plot_df["budget_musd"], plot_df["revenue_musd"],
-            c=studio_codes, cmap="tab20", alpha=0.7,
+            c=studio_codes, cmap=studio_cmap, norm=studio_norm, alpha=0.7,
         )
         ax.set_title("Revenue vs Budget")
         ax.set_xlabel("Budget (M USD)")
         ax.set_ylabel("Revenue (M USD)")
-        handles, _ = scatter.legend_elements(num=len(studio_labels))
-        ax.legend(handles, studio_labels, title="Production Company", bbox_to_anchor=(1.02, 1), loc="upper left", fontsize="small")
+        ax.legend(handles=studio_handles, title="Production Company", bbox_to_anchor=(1.02, 1), loc="upper left", fontsize="small")
         path = output_dir / "revenue_vs_budget.png"
         fig.tight_layout()
         fig.savefig(path, bbox_inches="tight")
@@ -70,15 +75,14 @@ def save_plots(df: pd.DataFrame, output_dir: Path) -> list[Path]:
         saved_paths.append(path)
 
         fig, ax = plt.subplots(figsize=(12, 9))
-        scatter = ax.scatter(
+        ax.scatter(
             plot_df["popularity"], plot_df["vote_average"],
-            c=studio_codes, cmap="tab20", alpha=0.7,
+            c=studio_codes, cmap=studio_cmap, norm=studio_norm, alpha=0.7,
         )
         ax.set_title("Popularity vs Rating")
         ax.set_xlabel("Popularity (/100)")
         ax.set_ylabel("Vote Average (/10)")
-        handles, _ = scatter.legend_elements(num=len(studio_labels))
-        ax.legend(handles, studio_labels, title="Production Company", bbox_to_anchor=(1.02, 1), loc="upper left", fontsize="small")
+        ax.legend(handles=studio_handles, title="Production Company", bbox_to_anchor=(1.02, 1), loc="upper left", fontsize="small")
         path = output_dir / "popularity_vs_rating.png"
         fig.tight_layout()
         fig.savefig(path, bbox_inches="tight")
