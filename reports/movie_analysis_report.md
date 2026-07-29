@@ -101,3 +101,22 @@ The Fast and the Furious Collection            1         190.0       190.00    1
 ## Director Summary
  director  movie_count  total_revenue  mean_rating
       NaN           18   30454.681775       7.4005
+
+## Visualizations
+
+Points on the scatter plots are color-encoded by each movie's primary production company (first company listed) to make studio-level patterns visible.
+
+### Revenue vs Budget
+![Revenue vs Budget](plots/revenue_vs_budget.png)
+
+Budget and revenue are loosely correlated but far from linear. *Avatar* (Dune Entertainment) and *Titanic* (Paramount Pictures) stand out as the strongest outliers — both earned well over 10x their budget, well above the pack. Marvel Studios (5 films) clusters consistently in the mid-to-high budget/revenue range, showing more predictable returns than the other studios, which each appear only once or twice.
+
+### Popularity vs Rating
+![Popularity vs Rating](plots/popularity_vs_rating.png)
+
+Popularity and audience rating are not strongly related. *Avengers: Endgame* and *Avengers: Infinity War* (Marvel Studios) share the highest rating (8.24) but sit at very different popularity levels (35.9 vs 50.7), and *Harry Potter and the Deathly Hallows: Part 2* (Warner Bros. Pictures) reaches a similarly high rating (8.08) with only moderate popularity (28.1). At the other end, the Jurassic World films (Amblin Entertainment) combine moderate-to-high popularity with the lowest ratings in the set (6.53–6.75), suggesting strong marketing reach didn't translate into critical reception for that franchise.
+
+### ROI Distribution by Genre
+![ROI Distribution by Genre](plots/roi_by_genre.png)
+
+ROI varies widely across genre combinations, and most combinations are represented by only one movie in this dataset, so the distributions should be read as illustrative rather than statistically robust (see the analysis note in [visualization.py](../src/tmdb_pipeline/visualization.py) on genre sparsity). The `Action|Science Fiction|Adventure` combination (*Avatar*) posts the highest ROI (~12.3x), and `Drama|Romance` (*Titanic*) follows closely (~11.3x). The `Adventure|Action|Science Fiction` genre set — spanning several Marvel and Star Wars titles — shows the widest spread (4.4x–8.4x), reflecting inconsistent returns even within a similar genre mix.
