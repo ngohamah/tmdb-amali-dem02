@@ -7,8 +7,12 @@ from .logger_config import configure_logger
 
 logger = configure_logger(__name__)
 
+"""
+#TODO: make the top 10 argument to be dynamic...
+in case we have more data in future... 
+"""
 
-def rank_movies(df: pd.DataFrame, metric: str, ascending: bool = False) -> pd.DataFrame:
+def rank_movies(df: pd.DataFrame, metric: str, ascending: bool = False, top_n: int = 10) -> pd.DataFrame:
     """Return a ranked dataframe for a metric."""
     if metric not in df.columns:
         if metric == "profit_musd" and "revenue_musd" in df.columns and "budget_musd" in df.columns:
@@ -19,7 +23,7 @@ def rank_movies(df: pd.DataFrame, metric: str, ascending: bool = False) -> pd.Da
             df["roi"] = df["revenue_musd"] / df["budget_musd"].replace(0, pd.NA)
         else:
             raise KeyError(f"Metric '{metric}' not found in dataframe")
-    return df.sort_values(by=metric, ascending=ascending).head(10).reset_index(drop=True)
+    return df.sort_values(by=metric, ascending=ascending).head(top_n).reset_index(drop=True)
 
 
 def build_rankings(df: pd.DataFrame) -> dict[str, pd.DataFrame]:
@@ -28,16 +32,16 @@ def build_rankings(df: pd.DataFrame) -> dict[str, pd.DataFrame]:
     budget_mask = df["budget_musd"].notna() if "budget_musd" in df.columns else pd.Series([False] * len(df), index=df.index)
     vote_mask = df["vote_count"].notna() if "vote_count" in df.columns else pd.Series([False] * len(df), index=df.index)
     return {
-        "highest_revenue": rank_movies(df, "revenue_musd", ascending=False),
-        "highest_budget": rank_movies(df, "budget_musd", ascending=False),
-        "highest_profit": rank_movies(df, "profit_musd", ascending=False),
-        "lowest_profit": rank_movies(df, "profit_musd", ascending=True),
-        "highest_roi": rank_movies(df.loc[budget_mask & (df["budget_musd"] >= 10)], "roi", ascending=False),
-        "lowest_roi": rank_movies(df.loc[budget_mask & (df["budget_musd"] >= 10)], "roi", ascending=True),
-        "most_voted": rank_movies(df, "vote_count", ascending=False),
-        "highest_rated": rank_movies(df.loc[vote_mask & (df["vote_count"] >= 10)], "vote_average", ascending=False),
-        "lowest_rated": rank_movies(df.loc[vote_mask & (df["vote_count"] >= 10)], "vote_average", ascending=True),
-        "most_popular": rank_movies(df, "popularity", ascending=False),
+        "highest_revenue": rank_movies(df, "revenue_musd", ascending=False, top_n=10),
+        "highest_budget": rank_movies(df, "budget_musd", ascending=False, top_n=10),
+        "highest_profit": rank_movies(df, "profit_musd", ascending=False, top_n=10),
+        "lowest_profit": rank_movies(df, "profit_musd", ascending=True, top_n=10),
+        "highest_roi": rank_movies(df.loc[budget_mask & (df["budget_musd"] >= 10)], "roi", ascending=False, top_n=10),
+        "lowest_roi": rank_movies(df.loc[budget_mask & (df["budget_musd"] >= 10)], "roi", ascending=True, top_n=10),
+        "most_voted": rank_movies(df, "vote_count", ascending=False, top_n=10),
+        "highest_rated": rank_movies(df.loc[vote_mask & (df["vote_count"] >= 10)], "vote_average", ascending=False, top_n=10),
+        "lowest_rated": rank_movies(df.loc[vote_mask & (df["vote_count"] >= 10)], "vote_average", ascending=True, top_n=10),
+        "most_popular": rank_movies(df, "popularity", ascending=False, top_n=10),
     }
 
 
