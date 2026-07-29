@@ -7,11 +7,6 @@ from .logger_config import configure_logger
 
 logger = configure_logger(__name__)
 
-"""
-#TODO: make the top 10 argument to be dynamic...
-in case we have more data in future... 
-"""
-
 def rank_movies(df: pd.DataFrame, metric: str, ascending: bool = False, top_n: int = 10) -> pd.DataFrame:
     """Return a ranked dataframe for a metric."""
     if metric not in df.columns:

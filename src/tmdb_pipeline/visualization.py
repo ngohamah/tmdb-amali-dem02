@@ -23,9 +23,9 @@ to indicate which is primary or more prevalent in the movie. Therefore color enc
 #TODO: Color code based on the original movie title. (X)
 
 ANALYSIS:
-This is only recommended b/c the dataset is small. For larger datasets, it might be better to encode based on the production company.
+This can be recommended b/c the dataset is small. For larger datasets, it might be better to encode based on the production company.
 
-#TODO: Color code based on the production company. (Best practice!)
+#TODO: Color code based on the production company. (Best practice!) - Completed ☑️
 '''
 
 def save_plots(df: pd.DataFrame, output_dir: Path) -> list[Path]:

@@ -46,30 +46,35 @@ def fetch_movie_payload(session: requests.Session, movie_id: int) -> dict[str, A
 
 
 def fetch_movie_batch(movie_ids: list[int] | None = None) -> list[dict[str, Any]]:
-    """Fetch a batch of movie payloads once and return them."""
+    """Fetch a batch of movie payloads, only pulling ids missing from the cache."""
     ids = movie_ids or MOVIE_IDS
     cached_payloads = load_cached_payloads(RAW_PAYLOAD_PATH)
-    if cached_payloads:
-        logger.info("Returning cached payloads for %d movies", len(cached_payloads))
-        return cached_payloads
+    cached_by_id = {payload["id"]: payload for payload in cached_payloads}
 
-    results: list[dict[str, Any]] = []
+    valid_ids: list[int] = []
+    for movie_id in ids:
+        if movie_id <= 0:
+            logger.info("Skipping invalid movie id %s", movie_id)
+            continue
+        valid_ids.append(movie_id)
+
+    missing_ids = [movie_id for movie_id in valid_ids if movie_id not in cached_by_id]
+    if not missing_ids:
+        logger.info("Returning cached payloads for %d movies", len(valid_ids))
+        return [cached_by_id[movie_id] for movie_id in valid_ids]
+
+    logger.info("Fetching %d movie id(s) missing from cache: %s", len(missing_ids), missing_ids)
     with requests.Session() as session:
-        for movie_id in ids:
-            if movie_id <= 0:
-                logger.info("Skipping invalid movie id %s", movie_id)
-                continue
+        for movie_id in missing_ids:
             try:
-                payload = fetch_movie_payload(session, movie_id)
-            except ValueError:
-                logger.info("Error Returning %d movies", movie_id)
-                return json.loads(SAMPLE_PAYLOAD_PATH.read_text(encoding="utf-8"))
-            except requests.RequestException:
-                logger.info("Error Returning %d movies", movie_id)
-                return json.loads(SAMPLE_PAYLOAD_PATH.read_text(encoding="utf-8"))
-            results.append(payload)
+                cached_by_id[movie_id] = fetch_movie_payload(session, movie_id)
+            except (ValueError, requests.RequestException):
+                if not cached_by_id:
+                    logger.info("No cache available and API unreachable; falling back to sample payloads")
+                    return json.loads(SAMPLE_PAYLOAD_PATH.read_text(encoding="utf-8"))
+                logger.warning("Could not fetch movie id %s; leaving it out of this run", movie_id)
 
     RAW_PAYLOAD_PATH.parent.mkdir(parents=True, exist_ok=True)
-    RAW_PAYLOAD_PATH.write_text(json.dumps(results, indent=2), encoding="utf-8")
-    logger.info("Completed batch fetch for %d movies", len(results))
-    return results
+    RAW_PAYLOAD_PATH.write_text(json.dumps(list(cached_by_id.values()), indent=2), encoding="utf-8")
+    logger.info("Completed batch fetch; cache now holds %d movies", len(cached_by_id))
+    return [cached_by_id[movie_id] for movie_id in valid_ids if movie_id in cached_by_id]
